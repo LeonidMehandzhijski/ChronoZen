@@ -1,4 +1,4 @@
-# Productivity Suite Pro
+# ChronoZen
 
 > Stay focused, be productive, and enjoy your music - all in one Chrome extension!
 
