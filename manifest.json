@@ -1,0 +1,72 @@
+{
+  "manifest_version": 3,
+  "name": "Productivity Suite Pro",
+  "version": "1.0.0",
+  "description": "A highly customizable productivity suite with Pomodoro timer, task management, and media integration",
+  "permissions": [
+    "storage",        // To store settings, tasks, history
+    "tabs",
+    "activeTab",
+    "notifications",  // To show alerts for timers/reminders
+    "webNavigation",
+    "identity",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.spotify.com/*",
+    "*://*.youtube.com/*",
+    "https://open.spotify.com/*",
+    "https://accounts.spotify.com/*",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/index.js",
+    "type": "module" // Use ES modules if service worker imports other modules
+  },
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "src/options/index.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "Open Productivity Suite Pro"
+    }
+    // Add more commands later (e.g., start/stop timer)
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/index.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "oauth2": {
+    "client_id": "YOUR_CLIENT_ID",
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube.readonly",
+      "user-library-read",
+      "playlist-read-private",
+      "streaming"
+    ]
+  }
+}

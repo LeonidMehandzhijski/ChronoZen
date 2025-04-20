@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Suite Pro</title>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Material UI -->
+    <link href="https://cdn.jsdelivr.net/npm/@mui/material@5.15.0/dist/mui-material.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            width: 400px;
+            height: 600px;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #1e1e1e;
+            border-top: 1px solid #333;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+        }
+
+        .nav-item {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .nav-item.active {
+            color: #7C4DFF;
+        }
+
+        .material-icons {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .timer-container {
+            text-align: center;
+            padding: 32px 0;
+        }
+
+        .timer-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #7C4DFF;
+            margin: 16px 0;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            background-color: #7C4DFF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background-color: #6B42E0;
+        }
+
+        .task-list {
+            margin-top: 16px;
+        }
+
+        .task-item {
+            background-color: #1e1e1e;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .task-title {
+            flex-grow: 1;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="pomodoro" class="view active">
+            <div class="timer-container">
+                <h2>Pomodoro Timer</h2>
+                <div class="timer-display">25:00</div>
+                <div class="timer-controls">
+                    <button class="btn" id="startTimer">
+                        <span class="material-icons">play_arrow</span>
+                        Start
+                    </button>
+                    <button class="btn" id="resetTimer">
+                        <span class="material-icons">restart_alt</span>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tasks" class="view" style="display: none;">
+            <h2>Tasks</h2>
+            <div class="task-input">
+                <input type="text" id="newTask" placeholder="Add a new task..." style="width: 100%; padding: 8px; margin-bottom: 16px;">
+            </div>
+            <div class="task-list" id="taskList">
+                <!-- Tasks will be added here dynamically -->
+            </div>
+        </div>
+
+        <div id="media" class="view" style="display: none;">
+            <h2>Media Player</h2>
+            <!-- Media player content -->
+        </div>
+
+        <div id="tabs" class="view" style="display: none;">
+            <h2>Tab Timer</h2>
+            <!-- Tab timer content -->
+        </div>
+
+        <div id="settings" class="view" style="display: none;">
+            <h2>Settings</h2>
+            <!-- Settings content -->
+        </div>
+    </div>
+
+    <nav class="nav-bottom">
+        <div class="nav-items">
+            <a href="#" class="nav-item active" data-view="pomodoro">
+                <span class="material-icons">timer</span>
+                Pomodoro
+            </a>
+            <a href="#" class="nav-item" data-view="tasks">
+                <span class="material-icons">list</span>
+                Tasks
+            </a>
+            <a href="#" class="nav-item" data-view="media">
+                <span class="material-icons">play_circle</span>
+                Media
+            </a>
+            <a href="#" class="nav-item" data-view="tabs">
+                <span class="material-icons">tab</span>
+                Tabs
+            </a>
+            <a href="#" class="nav-item" data-view="settings">
+                <span class="material-icons">settings</span>
+                Settings
+            </a>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="popup.js"></script>
+</body>
+</html> 

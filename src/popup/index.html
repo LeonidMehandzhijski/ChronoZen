@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Suite Pro</title>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Material UI -->
+    <link href="https://cdn.jsdelivr.net/npm/@mui/material@5.15.0/dist/mui-material.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            width: 400px;
+            height: 600px;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #1e1e1e;
+            border-top: 1px solid #333;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+        }
+
+        .nav-item {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .nav-item.active {
+            color: #7C4DFF;
+        }
+
+        .material-icons {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .timer-container {
+            text-align: center;
+            padding: 32px 0;
+        }
+
+        .timer-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #7C4DFF;
+            margin: 16px 0;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            background-color: #7C4DFF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background-color: #6B42E0;
+        }
+
+        .task-list {
+            margin-top: 16px;
+        }
+
+        .task-item {
+            background-color: #1e1e1e;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .task-title {
+            flex-grow: 1;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Tab Timer styles */
+        .tab-stats {
+            padding: 16px;
+        }
+
+        .current-tab {
+            background-color: #1e1e1e;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .site-url {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        .time-spent {
+            color: #7C4DFF;
+            font-weight: bold;
+        }
+
+        .limit-input {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .limit-input input {
+            padding: 8px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .sites-container {
+            margin-top: 16px;
+        }
+
+        .site-item {
+            background-color: #1e1e1e;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .site-name {
+            font-weight: bold;
+        }
+
+        .site-time {
+            color: #7C4DFF;
+            font-size: 14px;
+        }
+
+        .site-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Settings styles */
+        .settings-section {
+            background-color: #1e1e1e;
+            padding: 16px;
+            margin: 16px;
+            border-radius: 8px;
+        }
+
+        .setting-item {
+            margin: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .setting-item label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .setting-item input[type="number"],
+        .setting-item select {
+            width: 80px;
+            padding: 4px 8px;
+            background-color: #2d2d2d;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .setting-item select {
+            width: auto;
+        }
+
+        .settings-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 24px 16px;
+        }
+
+        /* Theme styles */
+        body.dark {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        body.light {
+            background-color: #ffffff;
+            color: #121212;
+        }
+
+        body.light .btn {
+            background-color: #7C4DFF;
+            color: white;
+        }
+
+        body.light .settings-section,
+        body.light .current-tab,
+        body.light .site-item {
+            background-color: #f5f5f5;
+        }
+
+        body.light .setting-item input[type="number"],
+        body.light .setting-item select,
+        body.light .limit-input input {
+            background-color: white;
+            border-color: #ddd;
+            color: #121212;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="pomodoro" class="view active">
+            <div class="timer-container">
+                <h2>Pomodoro Timer</h2>
+                <div class="timer-display">25:00</div>
+                <div class="timer-controls">
+                    <button class="btn" id="startTimer">
+                        <span class="material-icons">play_arrow</span>
+                        Start
+                    </button>
+                    <button class="btn" id="resetTimer">
+                        <span class="material-icons">restart_alt</span>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tasks" class="view" style="display: none;">
+            <h2>Tasks</h2>
+            <div class="task-input">
+                <input type="text" id="newTask" placeholder="Add a new task..." style="width: 100%; padding: 8px; margin-bottom: 16px;">
+            </div>
+            <div class="task-list" id="taskList">
+                <!-- Tasks will be added here dynamically -->
+            </div>
+        </div>
+
+        <div id="media" class="view" style="display: none;">
+            <h2>Media Player</h2>
+            <div class="login-section" id="loginSection">
+                <div class="service-login">
+                    <button class="btn spotify-login" id="spotifyLogin">
+                        <span class="material-icons">music_note</span>
+                        Login with Spotify
+                    </button>
+                </div>
+                <div class="service-login" style="margin-top: 16px;">
+                    <button class="btn youtube-login" id="youtubeLogin">
+                        <span class="material-icons">play_circle</span>
+                        Login with YouTube
+                    </button>
+                </div>
+            </div>
+
+            <div class="player-section" id="playerSection" style="display: none;">
+                <div class="service-selector" style="margin-bottom: 16px;">
+                    <button class="btn" id="spotifyTab">Spotify</button>
+                    <button class="btn" id="youtubeTab">YouTube</button>
+                </div>
+
+                <div class="playlist-section">
+                    <select id="playlistSelect" class="playlist-select">
+                        <option value="">Select a playlist...</option>
+                    </select>
+                </div>
+
+                <div class="embedded-player" id="spotifyPlayer" style="margin-top: 16px;">
+                    <!-- Spotify iframe will be inserted here -->
+                </div>
+
+                <div class="embedded-player" id="youtubePlayer" style="margin-top: 16px; display: none;">
+                    <!-- YouTube iframe will be inserted here -->
+                </div>
+
+                <div class="player-controls" style="margin-top: 16px; text-align: center;">
+                    <button class="btn" id="prevTrack">
+                        <span class="material-icons">skip_previous</span>
+                    </button>
+                    <button class="btn" id="playPause">
+                        <span class="material-icons">play_arrow</span>
+                    </button>
+                    <button class="btn" id="nextTrack">
+                        <span class="material-icons">skip_next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabs" class="view" style="display: none;">
+            <h2>Tab Timer</h2>
+            <div class="tab-stats">
+                <div class="current-tab">
+                    <h3>Current Website</h3>
+                    <div id="currentTabInfo">
+                        <p class="site-url">-</p>
+                        <p class="time-spent">Time today: <span id="currentTabTime">0:00</span></p>
+                    </div>
+                </div>
+
+                <div class="time-limits" style="margin-top: 24px;">
+                    <h3>Time Limits</h3>
+                    <div class="limit-input">
+                        <input type="text" id="siteUrl" placeholder="Enter website (e.g., youtube.com)">
+                        <input type="number" id="timeLimit" placeholder="Minutes per day">
+                        <button class="btn" id="addLimit">
+                            <span class="material-icons">add</span>
+                            Set Limit
+                        </button>
+                    </div>
+                </div>
+
+                <div class="site-list" style="margin-top: 24px;">
+                    <h3>Website Tracking</h3>
+                    <div id="sitesList" class="sites-container">
+                        <!-- Sites will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings" class="view" style="display: none;">
+            <h2>Settings</h2>
+            
+            <div class="settings-section">
+                <h3>Pomodoro Timer</h3>
+                <div class="setting-item">
+                    <label>Work Duration (minutes)</label>
+                    <input type="number" id="workDuration" min="1" max="60">
+                </div>
+                <div class="setting-item">
+                    <label>Short Break Duration (minutes)</label>
+                    <input type="number" id="shortBreakDuration" min="1" max="30">
+                </div>
+                <div class="setting-item">
+                    <label>Long Break Duration (minutes)</label>
+                    <input type="number" id="longBreakDuration" min="1" max="60">
+                </div>
+                <div class="setting-item">
+                    <label>Sessions Before Long Break</label>
+                    <input type="number" id="sessionsBeforeLongBreak" min="1" max="10">
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Notifications</h3>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="notifySound">
+                        Enable Sound
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="notifyDesktop">
+                        Enable Desktop Notifications
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Website Blocking</h3>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="enableBlocking">
+                        Enable Website Blocking
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Theme</h3>
+                <div class="setting-item">
+                    <label>Color Theme</label>
+                    <select id="colorTheme">
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                        <option value="system">System Default</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Account</h3>
+                <div class="setting-item">
+                    <button class="btn" id="logoutSpotify">
+                        <span class="material-icons">logout</span>
+                        Logout from Spotify
+                    </button>
+                </div>
+                <div class="setting-item">
+                    <button class="btn" id="logoutYoutube">
+                        <span class="material-icons">logout</span>
+                        Logout from YouTube
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button class="btn" id="saveSettings">
+                    <span class="material-icons">save</span>
+                    Save Settings
+                </button>
+                <button class="btn" id="resetSettings">
+                    <span class="material-icons">restore</span>
+                    Reset to Default
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav-bottom">
+        <div class="nav-items">
+            <a href="#" class="nav-item active" data-view="pomodoro">
+                <span class="material-icons">timer</span>
+                Pomodoro
+            </a>
+            <a href="#" class="nav-item" data-view="tasks">
+                <span class="material-icons">list</span>
+                Tasks
+            </a>
+            <a href="#" class="nav-item" data-view="media">
+                <span class="material-icons">play_circle</span>
+                Media
+            </a>
+            <a href="#" class="nav-item" data-view="tabs">
+                <span class="material-icons">tab</span>
+                Tabs
+            </a>
+            <a href="#" class="nav-item" data-view="settings">
+                <span class="material-icons">settings</span>
+                Settings
+            </a>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="index.js"></script>
+</body>
+</html>
