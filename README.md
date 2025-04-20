@@ -63,7 +63,7 @@ ChronoZen is your all-in-one productivity companion that lives right in your bro
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/productivity-suite-pro.git
+   git clone https://github.com/LeonidMehandzhijski/ChronoZen.git
    ```
 
 2. Open Chrome and go to `chrome://extensions/`
