@@ -12,7 +12,7 @@
 
 ## What's This?
 
-Productivity Suite Pro is your all-in-one productivity companion that lives right in your browser! It combines everything you need to stay focused and productive:
+ChronoZen is your all-in-one productivity companion that lives right in your browser! It combines everything you need to stay focused and productive:
 
 - **Pomodoro Timer** - Work smarter with customizable work/break sessions
 - **Task Manager** - Keep track of your to-dos
